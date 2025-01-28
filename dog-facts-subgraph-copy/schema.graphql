@@ -1,0 +1,33 @@
+extend schema
+  @link(url: "https://specs.apollo.dev/federation/v2.7", import: ["@key"])
+
+type Query {
+  getBookByQuery(query: String!): BookSearchResult
+  getBookByTitle(title: String!): BookSearchResult
+  getBookByAuthor(author: String!): [Author]
+}
+
+type BookSearchResult {
+  numFound: Int
+  start: Int
+  numFoundExact: Boolean
+  docs: [Book!]!
+}
+
+type Book {
+  authorName: [String]
+  editionCount: Int
+  firstPublishYear: Int
+  firstSentence: [String]
+  format: [String]
+  hasFulltext: Boolean
+  language: [String]
+}
+
+type Author {
+  name: String
+  birthDate: String
+  deathDate: String
+  topSubjects: [String]
+  topWork: String
+}
